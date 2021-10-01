@@ -40,6 +40,11 @@ namespace IB_form
             MessageBox.Show("Неверный формат пароля", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        public void User_Block()
+        {
+            MessageBox.Show("Пользователь заблокирован", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         public string Encrypt(string str)
         {
             return str;
@@ -47,7 +52,6 @@ namespace IB_form
 
         private void button_login_Click(object sender, EventArgs e)
         {
-
             var user = logic.Read(new UserBindingModel()
             {
                 Login = textBox_login.Text
@@ -56,18 +60,30 @@ namespace IB_form
             {
                 User_not_found();
             }
+            if (user[0].Block)
+            {
+                User_Block();
+            }
             else
             {
                 if (Encrypt(textBox_password.Text).Equals(user[0].Password))
                 {
+                    if (user[0].FirstLogin)
+                    {
+                        var form = Container.Resolve<Form_Password_Replacement>();
+                        form.User = user[0];
+                        form.ShowDialog();
+                    } else
                     if (user[0].Admin)
                     {
                         var form = Container.Resolve<Form_Main_Admin>();
+                        form.User = user[0];
                         form.ShowDialog();
                     }
                     else
                     {
                         var form = Container.Resolve<Form_User>();
+                        form.user = user[0];
                         form.ShowDialog();
                     }
                 }

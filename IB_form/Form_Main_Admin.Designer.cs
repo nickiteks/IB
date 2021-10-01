@@ -92,6 +92,7 @@ namespace IB_form
             this.button_add_username.TabIndex = 3;
             this.button_add_username.Text = "Добавить имя пользователя";
             this.button_add_username.UseVisualStyleBackColor = true;
+            this.button_add_username.Click += new System.EventHandler(this.button_add_username_Click);
             // 
             // button_block
             // 
@@ -101,6 +102,7 @@ namespace IB_form
             this.button_block.TabIndex = 4;
             this.button_block.Text = "Заблокировать";
             this.button_block.UseVisualStyleBackColor = true;
+            this.button_block.Click += new System.EventHandler(this.button_block_Click);
             // 
             // button_limit_on
             // 
@@ -110,6 +112,7 @@ namespace IB_form
             this.button_limit_on.TabIndex = 5;
             this.button_limit_on.Text = "Включить ограничения";
             this.button_limit_on.UseVisualStyleBackColor = true;
+            this.button_limit_on.Click += new System.EventHandler(this.button_limit_on_Click);
             // 
             // button_limit_off
             // 
@@ -119,6 +122,7 @@ namespace IB_form
             this.button_limit_off.TabIndex = 6;
             this.button_limit_off.Text = "Выключить ограничения";
             this.button_limit_off.UseVisualStyleBackColor = true;
+            this.button_limit_off.Click += new System.EventHandler(this.button_limit_off_Click);
             // 
             // Form_Main_Admin
             // 
@@ -135,6 +139,7 @@ namespace IB_form
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Form_Main_Admin";
             this.Text = "Главная";
+            this.Load += new System.EventHandler(this.Form_Main_Admin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();

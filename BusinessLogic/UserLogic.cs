@@ -44,6 +44,7 @@ namespace BusinessLogic
             element.PasswordRestrictions = model.PasswordRestrictions;
             element.Admin = model.Admin;
             element.Block = model.Block;
+            element.FirstLogin = model.FirstLogin;
         }
 
         public void Delete(UserBindingModel model)
@@ -60,6 +61,24 @@ namespace BusinessLogic
             }
         }
 
+        public void onPasswordRestrictions(int v)
+        {
+            var user = source.Users.Where(rec => v == rec.Id).FirstOrDefault();
+            user.PasswordRestrictions = true;
+        }
+
+        public void offPasswordRestrictions(int v)
+        {
+            var user = source.Users.Where(rec => v == rec.Id).FirstOrDefault();
+            user.PasswordRestrictions = false;
+        }
+
+        public void BlockUser(int value)
+        {
+            var user = source.Users.Where(rec => value == rec.Id).FirstOrDefault();
+            user.Block = true;
+        }
+
         public List<UserBindingModel> Read(UserBindingModel model)
         {
             return source.Users
@@ -71,7 +90,8 @@ namespace BusinessLogic
                 Block = rec.Block,
                 Password = rec.Password,
                 Login = rec.Login,
-                PasswordRestrictions = rec.PasswordRestrictions             
+                PasswordRestrictions = rec.PasswordRestrictions,
+                FirstLogin = rec.FirstLogin
             })
             .ToList();
         }

@@ -126,6 +126,7 @@ namespace IB_form
             this.Controls.Add(this.textBox_password);
             this.Name = "Form_Password_Replacement";
             this.Text = "Замена пароля";
+            this.Load += new System.EventHandler(this.Form_Password_Replacement_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

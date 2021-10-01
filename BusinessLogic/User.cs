@@ -14,6 +14,7 @@ namespace BusinessLogic
         public bool Admin { get; set; }
         public bool Block { get; set; }
         public bool PasswordRestrictions { get; set; }
+        public bool FirstLogin { get; set; }
 
     }
 }

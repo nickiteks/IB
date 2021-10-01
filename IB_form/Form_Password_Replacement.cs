@@ -14,24 +14,60 @@ namespace IB_form
 {
     public partial class Form_Password_Replacement : Form
     {
+        [Dependency]
+        public new IUnityContainer Container { get; set; }
+        private readonly UserLogic logic;
+        public UserBindingModel User { get; internal set; }
+
         public Form_Password_Replacement(UserLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
         }
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly UserLogic logic;
         private void button_cansel_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<Form_Main_Admin>();
-            form.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void button_OK_Click(object sender, EventArgs e)
         {
-            
+            if (Validation())
+            {
+                Password_wrong_validation();
+                return;
+            } 
+            else if(!User.FirstLogin && !User.Password.Equals(textBox_old_password.Text)) 
+            {
+                Old_Password_wrong_validation();
+                return;
+            }
+            User.Password = textBox_password_repeat.Text;
+            User.FirstLogin = false;
+            logic.CreateOrUpdate(User);
+            this.Close();
+        }
+
+
+        private void Form_Password_Replacement_Load(object sender, EventArgs e)
+        {
+            if (User.FirstLogin)
+            {
+                textBox_old_password.Enabled = false;
+            }
+        }
+
+        private bool Validation()
+        {
+            return (!textBox_password.Text.Equals(textBox_password_repeat.Text));
+        }
+        private void Old_Password_wrong_validation()
+        {
+            MessageBox.Show("Старый пароль введен не верно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public void Password_wrong_validation()
+        {
+            MessageBox.Show("Пароли не совпадают", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

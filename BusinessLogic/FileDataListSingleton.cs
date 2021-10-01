@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -12,11 +13,28 @@ namespace BusinessLogic
     {
         private static FileDataListSingleton instance;
         private readonly string UserFileName = "User.xml";
+        private DESCryptoServiceProvider des;
 
         public List<User> Users { get; set; }
 
-        private FileDataListSingleton()
+        public FileDataListSingleton(string passPhrase)
         {
+            if (des == null)
+            {
+                try
+                {
+                    des = new DESCryptoServiceProvider
+                    {
+                        Mode = CipherMode.OFB
+                    };
+                    byte[] arr = Encoding.UTF8.GetBytes(passPhrase).ToList().Take(8).ToArray();
+                    des.Key = arr;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
             Users = LoadUser();
         }
 
@@ -45,10 +63,11 @@ namespace BusinessLogic
                 list.Add(new User()
                 {
                     Login = "admin",
-                    Password = "1",
+                    Password = "",
                     Admin = true,
                     Block  = false,
                     PasswordRestrictions = false,
+                    FirstLogin = true,
                 });
             }
             return list;
@@ -85,6 +104,39 @@ namespace BusinessLogic
                 XDocument xDocument = new XDocument(xEl);
                 xDocument.Save(UserFileName);
             }
+        }
+
+        public string Encrypt(string originalString)
+        {
+            if (string.IsNullOrEmpty(originalString))
+            {
+                throw new ArgumentNullException
+                       ("The string which needs to be encrypted can not be null.");
+            }
+            MemoryStream memoryStream = new MemoryStream();
+            CryptoStream cryptoStream = new CryptoStream(memoryStream,
+                des.CreateEncryptor(des.Key, des.IV), CryptoStreamMode.Write);
+            StreamWriter writer = new StreamWriter(cryptoStream);
+            writer.Write(originalString);
+            writer.Flush();
+            cryptoStream.FlushFinalBlock();
+            writer.Flush();
+            return Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+        }
+
+        public string Decrypt(string cryptedString)
+        {
+            if (string.IsNullOrEmpty(cryptedString))
+            {
+                throw new ArgumentNullException
+                   ("The string which needs to be decrypted can not be null.");
+            }
+            MemoryStream memoryStream = new MemoryStream
+                    (Convert.FromBase64String(cryptedString));
+            CryptoStream cryptoStream = new CryptoStream(memoryStream,
+                des.CreateDecryptor(des.Key, des.IV), CryptoStreamMode.Read);
+            StreamReader reader = new StreamReader(cryptoStream);
+            return reader.ReadToEnd();
         }
     }
 }
