@@ -63,7 +63,7 @@ namespace BusinessLogic
         public List<UserBindingModel> Read(UserBindingModel model)
         {
             return source.Users
-            .Where(rec => model == null || rec.Id == model.Id || (rec.Login == model.Login && rec.Password == model.Password))
+            .Where(rec => model == null || rec.Id == model.Id || (rec.Login == model.Login))
             .Select(rec => new UserBindingModel
             {
                 Id = rec.Id,

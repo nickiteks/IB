@@ -20,13 +20,13 @@ namespace IB_form
             var container = BuildUnityContainer();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_Login());
+            Application.Run(container.Resolve<Form_Login>());
         }
 
-        private static object BuildUnityContainer()
+        private static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
-            currentContainer.RegisterType<UserLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<UserLogic,UserLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

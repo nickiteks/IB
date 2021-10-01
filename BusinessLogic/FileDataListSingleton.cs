@@ -32,13 +32,24 @@ namespace BusinessLogic
                     list.Add(new User
                     {
                         Id = Convert.ToInt32(el.Attribute("Id").Value),
-                        Block = Convert.ToBoolean(el.Attribute("Block").Value),
-                        Login = el.Attribute("Login").Value,
-                        Admin = Convert.ToBoolean(el.Attribute("Admin").Value),
-                        Password = el.Attribute("Password").Value,
-                        PasswordRestrictions = Convert.ToBoolean(el.Attribute("PasswordRestrictions").Value)
+                        Block = Convert.ToBoolean(el.Element("Block").Value),
+                        Login = el.Element("Login").Value,
+                        Admin = Convert.ToBoolean(el.Element("Admin").Value),
+                        Password = el.Element("Password").Value,
+                        PasswordRestrictions = Convert.ToBoolean(el.Element("PasswordRestrictions").Value)
                     });
                 }
+            }
+            else
+            {
+                list.Add(new User()
+                {
+                    Login = "admin",
+                    Password = "1",
+                    Admin = true,
+                    Block  = false,
+                    PasswordRestrictions = false,
+                });
             }
             return list;
         }
@@ -67,7 +78,7 @@ namespace BusinessLogic
                         new XElement("Block",user.Block),
                         new XElement("Login",user.Login),
                         new XElement("Admin",user.Admin),
-                        new XElement("Password", user.Password),
+                        new XElement("Password", user.Password.ToString()),
                         new XElement("PasswordRestrictions", user.PasswordRestrictions)
                         ));
                 }

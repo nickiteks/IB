@@ -44,6 +44,7 @@ namespace IB_form
             this.button_login.TabIndex = 0;
             this.button_login.Text = "Войти";
             this.button_login.UseVisualStyleBackColor = true;
+            this.button_login.Click += new System.EventHandler(this.button_login_Click);
             // 
             // textBox_login
             // 
