@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace IB_form
 {
-    public partial class Form1 : Form
+    public partial class Form_Password_Replacement : Form
     {
-        public Form1()
+        public Form_Password_Replacement()
         {
             InitializeComponent();
         }
