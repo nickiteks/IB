@@ -82,6 +82,7 @@ namespace IB_form
             this.button_OK.TabIndex = 9;
             this.button_OK.Text = "ОК";
             this.button_OK.UseVisualStyleBackColor = true;
+            this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
             // 
             // button_cansel
             // 
@@ -91,6 +92,7 @@ namespace IB_form
             this.button_cansel.TabIndex = 10;
             this.button_cansel.Text = "Отмена";
             this.button_cansel.UseVisualStyleBackColor = true;
+            this.button_cansel.Click += new System.EventHandler(this.button_cansel_Click);
             // 
             // label_old_password
             // 

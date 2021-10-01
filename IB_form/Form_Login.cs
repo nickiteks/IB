@@ -63,12 +63,12 @@ namespace IB_form
                     if (user[0].Admin)
                     {
                         var form = Container.Resolve<Form_Main_Admin>();
-                        form.Show();
+                        form.ShowDialog();
                     }
                     else
                     {
                         var form = Container.Resolve<Form_User>();
-                        form.Show();
+                        form.ShowDialog();
                     }
                 }
                 else

@@ -82,6 +82,7 @@ namespace IB_form
             this.button_change_password.TabIndex = 2;
             this.button_change_password.Text = "Изменить пароль";
             this.button_change_password.UseVisualStyleBackColor = true;
+            this.button_change_password.Click += new System.EventHandler(this.button_change_password_Click);
             // 
             // button_add_username
             // 
