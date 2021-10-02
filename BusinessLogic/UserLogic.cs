@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Utilities.Encoders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +12,9 @@ namespace BusinessLogic
     {
         private readonly FileDataListSingleton source;
 
-        public UserLogic()
+        public UserLogic(string pass)
         {
-            source = FileDataListSingleton.GetInstance();
+            if (!string.IsNullOrEmpty(pass)) source = FileDataListSingleton.GetInstance(pass);
         }
 
         public void CreateOrUpdate(UserBindingModel model)

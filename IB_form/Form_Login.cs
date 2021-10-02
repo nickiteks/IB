@@ -1,4 +1,6 @@
 ﻿using BusinessLogic;
+using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Utilities.Encoders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,10 +47,6 @@ namespace IB_form
             MessageBox.Show("Пользователь заблокирован", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public string Encrypt(string str)
-        {
-            return str;
-        }
 
         private void button_login_Click(object sender, EventArgs e)
         {
@@ -66,7 +64,7 @@ namespace IB_form
             }
             else
             {
-                if (Encrypt(textBox_password.Text).Equals(user[0].Password))
+                if (Program.Encrypt(textBox_password.Text).Equals(user[0].Password))
                 {
                     if (user[0].FirstLogin)
                     {

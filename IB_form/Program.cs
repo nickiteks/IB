@@ -1,7 +1,10 @@
 ﻿using BusinessLogic;
+using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Utilities.Encoders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
@@ -17,17 +20,23 @@ namespace IB_form
         [STAThread]
         static void Main()
         {
-            var container = BuildUnityContainer();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(container.Resolve<Form_Login>());
+            Application.Run(new FormEnterPass());
         }
 
-        private static IUnityContainer BuildUnityContainer()
+        public static IUnityContainer BuildUnityContainer(string pass)
         {
             var currentContainer = new UnityContainer();
-            currentContainer.RegisterType<UserLogic,UserLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<UserLogic,UserLogic>(Invoke.Constructor(pass));
             return currentContainer;
+        }
+
+        public static string Encrypt(string str)
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(str);
+            byte[] hashBytes = DigestUtilities.CalculateDigest("MD4", bytes);
+            return Hex.ToHexString(hashBytes);
         }
     }
 }

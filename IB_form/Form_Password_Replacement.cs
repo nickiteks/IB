@@ -36,12 +36,12 @@ namespace IB_form
                 Password_wrong_validation();
                 return;
             } 
-            else if(!User.FirstLogin && !User.Password.Equals(textBox_old_password.Text)) 
+            else if(!User.FirstLogin && !User.Password.Equals(Program.Encrypt(textBox_old_password.Text))) 
             {
                 Old_Password_wrong_validation();
                 return;
             }
-            User.Password = textBox_password_repeat.Text;
+            User.Password = Program.Encrypt(textBox_password_repeat.Text);
             User.FirstLogin = false;
             logic.CreateOrUpdate(User);
             this.Close();

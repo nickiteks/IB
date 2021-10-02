@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Utilities.Encoders;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace BusinessLogic
 
         public List<User> Users { get; set; }
 
-        public FileDataListSingleton(string passPhrase)
+        public FileDataListSingleton(string pass)
         {
             if (des == null)
             {
@@ -25,17 +27,58 @@ namespace BusinessLogic
                 {
                     des = new DESCryptoServiceProvider
                     {
-                        Mode = CipherMode.OFB
+                        Mode = CipherMode.ECB
                     };
-                    byte[] arr = Encoding.UTF8.GetBytes(passPhrase).ToList().Take(8).ToArray();
+                    byte[] arr = Encoding.UTF8.GetBytes(pass).ToList().Take(8).ToArray();
+                    byte[] arr1 = Encoding.UTF8.GetBytes(pass).ToList().Take(8).ToArray();
                     des.Key = arr;
+                    des.IV = arr1;
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
             }
-            Users = LoadUser();
+            if(File.Exists(UserFileName.Replace(".xml", "Encrypt.Xml")))
+            {
+                DecryptFileUsers();
+                Users = LoadUser();
+            }
+            else
+            {
+                Users = new List<User>();
+                Users.Add(new User()
+                {
+                    Login = "admin",
+                    Password = this.EncryptMd4(""),
+                    Admin = true,
+                    Block = false,
+                    PasswordRestrictions = false,
+                    FirstLogin = true,
+                });
+            }
+        }
+
+        public string EncryptMd4(string str)
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(str);
+            byte[] hashBytes = DigestUtilities.CalculateDigest("MD4", bytes);
+            return Hex.ToHexString(hashBytes);
+        }
+
+        private void DecryptFileUsers()
+        {
+            string data;
+            using (StreamReader sr = new StreamReader(UserFileName.Replace(".xml", "Encrypt.Xml")))
+            {
+                data = sr.ReadToEnd();
+            }
+            data = Decrypt(data);
+            using (StreamWriter sw = new StreamWriter(UserFileName, false, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(data);
+            }
+            File.Delete(UserFileName.Replace(".xml", "Encrypt.Xml"));
         }
 
         private List<User> LoadUser()
@@ -58,31 +101,36 @@ namespace BusinessLogic
                     });
                 }
             }
-            else
-            {
-                list.Add(new User()
-                {
-                    Login = "admin",
-                    Password = "",
-                    Admin = true,
-                    Block  = false,
-                    PasswordRestrictions = false,
-                    FirstLogin = true,
-                });
-            }
+           
             return list;
         }
-        public static FileDataListSingleton GetInstance()
+        public static FileDataListSingleton GetInstance(string pass)
         {
             if (instance == null)
             {
-                instance = new FileDataListSingleton();
+                instance = new FileDataListSingleton(pass);
             }
             return instance;
         }
         ~FileDataListSingleton()
         {
             SaveUsers();
+            EncryptFileUsers();
+        }
+
+        private void EncryptFileUsers()
+        {
+            string data;
+            using (StreamReader sr = new StreamReader(UserFileName))
+            {
+                data = sr.ReadToEnd();
+            }
+            data = Encrypt(data);
+            using (StreamWriter sw = new StreamWriter(UserFileName.Replace(".xml","Encrypt.Xml"), false, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(data);
+            }
+            File.Delete(UserFileName);
         }
 
         private void SaveUsers()
