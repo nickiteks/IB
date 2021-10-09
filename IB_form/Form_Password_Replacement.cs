@@ -40,6 +40,10 @@ namespace IB_form
             {
                 Old_Password_wrong_validation();
                 return;
+            } else if (!Program.Restrictions(textBox_password.Text))
+            {
+                Password_wrong_Restriction_validation();
+                return;
             }
             User.Password = Program.Encrypt(textBox_password_repeat.Text);
             User.FirstLogin = false;
@@ -68,6 +72,11 @@ namespace IB_form
         public void Password_wrong_validation()
         {
             MessageBox.Show("Пароли не совпадают", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public void Password_wrong_Restriction_validation()
+        {
+            MessageBox.Show("Пароль не соответвствует политике безопасности", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
