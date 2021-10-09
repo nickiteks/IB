@@ -27,16 +27,28 @@ namespace IB_form
 
         private void button_OK_Click(object sender, EventArgs e)
         {
-            logic.CreateOrUpdate(new UserBindingModel()
+            try
             {
-                Admin = false,
-                Block = false,
-                FirstLogin = true,
-                Login = textBox_username.Text,
-                Password = Program.Encrypt(""),
-            });
-            AfterUpdate.Invoke();
-            this.Close();
+                logic.CreateOrUpdate(new UserBindingModel()
+                {
+                    Admin = false,
+                    Block = false,
+                    FirstLogin = true,
+                    Login = textBox_username.Text,
+                    Password = Program.Encrypt(""),
+                });
+                AfterUpdate.Invoke();
+                this.Close();
+            }
+            catch
+            {
+                User_Alrady();
+            }
+        }
+
+        public void User_Alrady()
+        {
+            MessageBox.Show("Пользователь с таким именем уже есть", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

@@ -71,6 +71,7 @@ namespace IB_form
             {
                 logic.onPasswordRestrictions(Convert.ToInt32(data[i].Cells[0].Value));
             }
+            UpdateData();
         }
 
         private void button_limit_off_Click(object sender, EventArgs e)
@@ -80,6 +81,7 @@ namespace IB_form
             {
                 logic.offPasswordRestrictions(Convert.ToInt32(data[i].Cells[0].Value));
             }
+            UpdateData();
         }
     }
 }

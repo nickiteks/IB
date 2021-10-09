@@ -97,7 +97,8 @@ namespace BusinessLogic
                         Login = el.Element("Login").Value,
                         Admin = Convert.ToBoolean(el.Element("Admin").Value),
                         Password = el.Element("Password").Value,
-                        PasswordRestrictions = Convert.ToBoolean(el.Element("PasswordRestrictions").Value)
+                        PasswordRestrictions = Convert.ToBoolean(el.Element("PasswordRestrictions").Value),
+                        FirstLogin = Convert.ToBoolean(el.Element("FirstLogin").Value)
                     });
                 }
             }
@@ -142,10 +143,11 @@ namespace BusinessLogic
                 {
                     xEl.Add(new XElement("User",
                         new XAttribute("Id", user.Id),
-                        new XElement("Block",user.Block),
+                        new XElement("Block", user.Block),
                         new XElement("Login",user.Login),
                         new XElement("Admin",user.Admin),
                         new XElement("Password", user.Password.ToString()),
+                        new XElement("FirstLogin", user.Block),
                         new XElement("PasswordRestrictions", user.PasswordRestrictions)
                         ));
                 }
