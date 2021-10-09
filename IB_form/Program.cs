@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
@@ -37,6 +38,12 @@ namespace IB_form
             byte[] bytes = Encoding.ASCII.GetBytes(str);
             byte[] hashBytes = DigestUtilities.CalculateDigest("MD4", bytes);
             return Hex.ToHexString(hashBytes);
+        }
+
+        public static bool Restrictions(string str)
+        {
+            string regex = @"[a-z,.]*";
+            return (Regex.IsMatch(str, regex, RegexOptions.IgnoreCase));        
         }
     }
 }
