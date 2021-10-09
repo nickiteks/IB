@@ -57,6 +57,7 @@ namespace IB_form
             if (user.Count < 1)
             {
                 User_not_found();
+                return;
             }
             if (user[0].Block)
             {

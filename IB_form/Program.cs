@@ -4,6 +4,7 @@ using Org.BouncyCastle.Utilities.Encoders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -35,15 +36,17 @@ namespace IB_form
 
         public static string Encrypt(string str)
         {
-            byte[] bytes = Encoding.ASCII.GetBytes(str);
-            byte[] hashBytes = DigestUtilities.CalculateDigest("MD4", bytes);
-            return Hex.ToHexString(hashBytes);
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(str));
+
+            return Convert.ToBase64String(hash);
         }
 
         public static bool Restrictions(string str)
         {
-            string regex = @"[a-z,.]*";
-            return (Regex.IsMatch(str, regex, RegexOptions.IgnoreCase));        
+            string regex = @"[a-z,.]+";
+            var a = Regex.IsMatch(str, regex);
+            return (Regex.IsMatch(str, regex, RegexOptions.None));        
         }
     }
 }

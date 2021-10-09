@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Security.Cryptography.HashAlgorithm
 
 namespace BusinessLogic
 {
@@ -27,7 +28,7 @@ namespace BusinessLogic
                 {
                     des = new DESCryptoServiceProvider
                     {
-                        Mode = CipherMode.ECB
+                        Mode = CipherMode.CBC
                     };
                     byte[] arr = Encoding.UTF8.GetBytes(pass).ToList().Take(8).ToArray();
                     byte[] arr1 = Encoding.UTF8.GetBytes(pass).ToList().Take(8).ToArray();
@@ -61,9 +62,10 @@ namespace BusinessLogic
 
         public string EncryptMd4(string str)
         {
-            byte[] bytes = Encoding.ASCII.GetBytes(str);
-            byte[] hashBytes = DigestUtilities.CalculateDigest("MD4", bytes);
-            return Hex.ToHexString(hashBytes);
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(str));
+
+            return Convert.ToBase64String(hash);
         }
 
         private void DecryptFileUsers()
