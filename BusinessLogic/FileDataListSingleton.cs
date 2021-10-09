@@ -147,7 +147,7 @@ namespace BusinessLogic
                         new XElement("Login",user.Login),
                         new XElement("Admin",user.Admin),
                         new XElement("Password", user.Password.ToString()),
-                        new XElement("FirstLogin", user.Block),
+                        new XElement("FirstLogin", user.FirstLogin),
                         new XElement("PasswordRestrictions", user.PasswordRestrictions)
                         ));
                 }
