@@ -71,6 +71,7 @@ namespace IB_form
             // 
             this.textBox_password.Location = new System.Drawing.Point(122, 67);
             this.textBox_password.Name = "textBox_password";
+            this.textBox_password.PasswordChar = '*';
             this.textBox_password.Size = new System.Drawing.Size(254, 20);
             this.textBox_password.TabIndex = 5;
             // 
@@ -108,6 +109,7 @@ namespace IB_form
             // 
             this.textBox_old_password.Location = new System.Drawing.Point(122, 23);
             this.textBox_old_password.Name = "textBox_old_password";
+            this.textBox_old_password.PasswordChar = '*';
             this.textBox_old_password.Size = new System.Drawing.Size(254, 20);
             this.textBox_old_password.TabIndex = 11;
             // 
