@@ -33,7 +33,7 @@ namespace IB_form
                 Block = false,
                 FirstLogin = true,
                 Login = textBox_username.Text,
-                Password = "",
+                Password = Program.Encrypt(""),
             });
             AfterUpdate.Invoke();
             this.Close();
