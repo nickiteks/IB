@@ -44,7 +44,7 @@ namespace IB_form
 
         public static bool Restrictions(string str)
         {
-            string regex = @"[a-z,.]+";
+            string regex = @"[a-zA-Z]+";
             var a = Regex.IsMatch(str, regex);
             return (Regex.IsMatch(str, regex, RegexOptions.None));        
         }
