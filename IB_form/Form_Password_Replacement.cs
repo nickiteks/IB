@@ -40,7 +40,7 @@ namespace IB_form
             {
                 Old_Password_wrong_validation();
                 return;
-            } else if (!Program.Restrictions(textBox_password.Text))
+            } else if (!Program.Restrictions(textBox_password.Text) && User.PasswordRestrictions)
             {
                 Password_wrong_Restriction_validation();
                 return;
