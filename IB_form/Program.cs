@@ -23,27 +23,7 @@ namespace IB_form
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormEnterPass());
-        }
-
-        public static IUnityContainer BuildUnityContainer(string pass)
-        {
-            var currentContainer = new UnityContainer();
-            currentContainer.RegisterType<UserLogic,UserLogic>(Invoke.Constructor(pass));
-            return currentContainer;
-        }
-
-        public static string Encrypt(string str)
-        {
-            byte[] bytes = Encoding.ASCII.GetBytes(str);
-            byte[] hashBytes = DigestUtilities.CalculateDigest("MD4", bytes);
-            return Hex.ToHexString(hashBytes);
-        }
-
-        public static bool Restrictions(string str)
-        {
-            string regex = @"[a-z,.]*";
-            return (Regex.IsMatch(str, regex, RegexOptions.IgnoreCase));        
+            Application.Run(new FormMain());
         }
     }
 }

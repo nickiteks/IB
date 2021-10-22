@@ -11,5 +11,15 @@ namespace BusinessLogic
         string FIO = "Гладилин Никита Дмитриевич";
         int variant = 2;
         string reference_information = "";
+
+        public string getName()
+        {
+            return FIO;
+        }
+
+        public int getVariant()
+        {
+            return variant;
+        }
     }
 }
