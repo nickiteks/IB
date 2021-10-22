@@ -53,11 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserBindingModel.cs" />
-    <Compile Include="FileDataListSingleton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserLogic.cs" />
+    <Compile Include="Variant.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
