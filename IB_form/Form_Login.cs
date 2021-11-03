@@ -97,5 +97,10 @@ namespace IB_form
                 }
             }
         }
+
+        private void Form_Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

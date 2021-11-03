@@ -24,7 +24,7 @@ namespace BusinessLogic
                 {
                     des = new DESCryptoServiceProvider
                     {
-                        Mode = CipherMode.CBC
+                        Mode = CipherMode.CFB
                     };
                     byte[] arr = Encoding.UTF8.GetBytes(pass).ToList().Take(8).ToArray();
                     byte[] arr1 = Encoding.UTF8.GetBytes(pass).ToList().Take(8).ToArray();

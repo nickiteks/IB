@@ -93,6 +93,7 @@ namespace IB_form
             this.Controls.Add(this.button_login);
             this.Name = "Form_Login";
             this.Text = "Вход";
+            this.Load += new System.EventHandler(this.Form_Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

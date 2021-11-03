@@ -13,6 +13,7 @@ namespace IB_form
 {
     public partial class FormEnterPass : Form
     {
+        private string salt = "random";
         public FormEnterPass()
         {
             InitializeComponent();
@@ -20,7 +21,7 @@ namespace IB_form
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var cont = Program.BuildUnityContainer(textBox1.Text);
+            var cont = Program.BuildUnityContainer(textBox1.Text+salt);
             var form = cont.Resolve<Form_Login>();
             form.Show();
             //this.Close();
