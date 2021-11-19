@@ -54,7 +54,7 @@ namespace IB_form
 
         private void button_encrypt_Click(object sender, EventArgs e)
         {
-            cryptManager =  new CrypterOFB();
+            cryptManager =  new CBCmanager();
             crypt = cryptManager.Crypt(richTextBoxOriginal.Text, int.Parse(textBox_Password.Text));
             richTextBoxCrypt.Text = crypt;            
         }
@@ -92,18 +92,7 @@ namespace IB_form
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            //StringBuilder str = new StringBuilder();
-            //for(int i = 0; i < 30; i++)
-            //{
-            //    str.Append("Name");
-            //}
-            //richTextBoxOriginal.Text = str.ToString()  ;
-            //textBox_Password.Text = "123";
-            //Crypter cryptManager = new CrypterOFB();
-            //string crypt = cryptManager.Crypt(richTextBoxOriginal.Text, int.Parse(textBox_Password.Text));
-            //var a = crypt.Length;
-            //richTextBoxCrypt.Text = crypt;
-            //richTextBoxEncrypt.Text = cryptManager.Encrypt(crypt, int.Parse(textBox_Password.Text));
+
         }
     }
 }
