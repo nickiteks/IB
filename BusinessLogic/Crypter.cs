@@ -17,7 +17,7 @@ namespace BusinessLogic
         protected void GenerateIV(int size)
         {
             this.size = size;
-            Random r = new Random(1);
+            Random r = new Random();
             IV = new byte[size];
             for(int i = 0; i < size; i++)
             {
