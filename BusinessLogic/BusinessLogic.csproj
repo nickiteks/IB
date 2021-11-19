@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CBCmanager.cs" />
     <Compile Include="Crypter.cs" />
     <Compile Include="CrypterOFB.cs" />
     <Compile Include="CryptManagerCBC.cs" />

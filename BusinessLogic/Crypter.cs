@@ -103,5 +103,15 @@ namespace BusinessLogic
             }
             Console.WriteLine();
         }
+
+        protected byte[] CloneArray(byte[] data)
+        {
+            byte[] Clone = new byte[data.Length];
+            for (int i = 0; i < data.Length; i++)
+            {
+                Clone[i] = data[i];
+            }
+            return Clone;
+        }
     }
 }

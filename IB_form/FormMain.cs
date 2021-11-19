@@ -45,13 +45,13 @@ namespace IB_form
         private void FormMain_Load(object sender, EventArgs e)
         {
             StringBuilder str = new StringBuilder();
-            for(int i = 0; i < 30; i++)
+            for(int i = 0; i < 12; i++)
             {
                 str.Append("Name");
             }
             richTextBoxOriginal.Text = str.ToString()  ;
             textBox_Password.Text = "123";
-            Crypter cryptManager = new CrypterOFB();
+            Crypter cryptManager = new CBCmanager(16);
             string crypt = cryptManager.Crypt(richTextBoxOriginal.Text, int.Parse(textBox_Password.Text));
             var a = crypt.Length;
             richTextBoxCrypt.Text = crypt;
