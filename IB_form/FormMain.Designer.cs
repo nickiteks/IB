@@ -41,12 +41,14 @@ namespace IB_form
             this.richTextBoxEncrypt = new System.Windows.Forms.RichTextBox();
             this.label_name = new System.Windows.Forms.Label();
             this.label_variant = new System.Windows.Forms.Label();
+            this.button_encrypt = new System.Windows.Forms.Button();
+            this.button_decipher = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_save
             // 
-            this.button_save.Location = new System.Drawing.Point(579, 166);
+            this.button_save.Location = new System.Drawing.Point(579, 201);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(138, 25);
             this.button_save.TabIndex = 0;
@@ -56,7 +58,7 @@ namespace IB_form
             // 
             // button_choose_file
             // 
-            this.button_choose_file.Location = new System.Drawing.Point(579, 127);
+            this.button_choose_file.Location = new System.Drawing.Point(579, 113);
             this.button_choose_file.Name = "button_choose_file";
             this.button_choose_file.Size = new System.Drawing.Size(138, 24);
             this.button_choose_file.TabIndex = 1;
@@ -144,17 +146,39 @@ namespace IB_form
             // label_variant
             // 
             this.label_variant.AutoSize = true;
-            this.label_variant.Location = new System.Drawing.Point(138, 201);
+            this.label_variant.Location = new System.Drawing.Point(246, 201);
             this.label_variant.Name = "label_variant";
             this.label_variant.Size = new System.Drawing.Size(35, 13);
             this.label_variant.TabIndex = 12;
             this.label_variant.Text = "label1";
+            // 
+            // button_encrypt
+            // 
+            this.button_encrypt.Location = new System.Drawing.Point(579, 143);
+            this.button_encrypt.Name = "button_encrypt";
+            this.button_encrypt.Size = new System.Drawing.Size(138, 23);
+            this.button_encrypt.TabIndex = 13;
+            this.button_encrypt.Text = "Зашифровать";
+            this.button_encrypt.UseVisualStyleBackColor = true;
+            this.button_encrypt.Click += new System.EventHandler(this.button_encrypt_Click);
+            // 
+            // button_decipher
+            // 
+            this.button_decipher.Location = new System.Drawing.Point(579, 172);
+            this.button_decipher.Name = "button_decipher";
+            this.button_decipher.Size = new System.Drawing.Size(138, 23);
+            this.button_decipher.TabIndex = 14;
+            this.button_decipher.Text = "Расшифровать";
+            this.button_decipher.UseVisualStyleBackColor = true;
+            this.button_decipher.Click += new System.EventHandler(this.button_decipher_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(862, 462);
+            this.Controls.Add(this.button_decipher);
+            this.Controls.Add(this.button_encrypt);
             this.Controls.Add(this.label_variant);
             this.Controls.Add(this.label_name);
             this.Controls.Add(this.richTextBoxEncrypt);
@@ -191,5 +215,7 @@ namespace IB_form
         private System.Windows.Forms.RichTextBox richTextBoxEncrypt;
         private System.Windows.Forms.Label label_name;
         private System.Windows.Forms.Label label_variant;
+        private System.Windows.Forms.Button button_encrypt;
+        private System.Windows.Forms.Button button_decipher;
     }
 }
