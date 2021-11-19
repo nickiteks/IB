@@ -31,13 +31,16 @@ namespace IB_form
         {
             this.button_save = new System.Windows.Forms.Button();
             this.button_choose_file = new System.Windows.Forms.Button();
-            this.label_name = new System.Windows.Forms.Label();
-            this.label_variant = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox_Password = new System.Windows.Forms.TextBox();
             this.label_password = new System.Windows.Forms.Label();
             this.button_password_from_file = new System.Windows.Forms.Button();
+            this.richTextBoxOriginal = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxCrypt = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxEncrypt = new System.Windows.Forms.RichTextBox();
+            this.label_name = new System.Windows.Forms.Label();
+            this.label_variant = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,24 +63,6 @@ namespace IB_form
             this.button_choose_file.Text = "Выбрать файл";
             this.button_choose_file.UseVisualStyleBackColor = true;
             this.button_choose_file.Click += new System.EventHandler(this.button_choose_file_Click);
-            // 
-            // label_name
-            // 
-            this.label_name.AutoSize = true;
-            this.label_name.Location = new System.Drawing.Point(45, 345);
-            this.label_name.Name = "label_name";
-            this.label_name.Size = new System.Drawing.Size(35, 13);
-            this.label_name.TabIndex = 2;
-            this.label_name.Text = "label1";
-            // 
-            // label_variant
-            // 
-            this.label_variant.AutoSize = true;
-            this.label_variant.Location = new System.Drawing.Point(317, 345);
-            this.label_variant.Name = "label_variant";
-            this.label_variant.Size = new System.Drawing.Size(35, 13);
-            this.label_variant.TabIndex = 3;
-            this.label_variant.Text = "label1";
             // 
             // menuStrip1
             // 
@@ -123,22 +108,68 @@ namespace IB_form
             this.button_password_from_file.UseVisualStyleBackColor = true;
             this.button_password_from_file.Click += new System.EventHandler(this.button_password_from_file_Click);
             // 
+            // richTextBoxOriginal
+            // 
+            this.richTextBoxOriginal.Location = new System.Drawing.Point(12, 354);
+            this.richTextBoxOriginal.Name = "richTextBoxOriginal";
+            this.richTextBoxOriginal.Size = new System.Drawing.Size(100, 96);
+            this.richTextBoxOriginal.TabIndex = 8;
+            this.richTextBoxOriginal.Text = "";
+            // 
+            // richTextBoxCrypt
+            // 
+            this.richTextBoxCrypt.Location = new System.Drawing.Point(126, 354);
+            this.richTextBoxCrypt.Name = "richTextBoxCrypt";
+            this.richTextBoxCrypt.Size = new System.Drawing.Size(100, 96);
+            this.richTextBoxCrypt.TabIndex = 9;
+            this.richTextBoxCrypt.Text = "";
+            // 
+            // richTextBoxEncrypt
+            // 
+            this.richTextBoxEncrypt.Location = new System.Drawing.Point(232, 354);
+            this.richTextBoxEncrypt.Name = "richTextBoxEncrypt";
+            this.richTextBoxEncrypt.Size = new System.Drawing.Size(100, 96);
+            this.richTextBoxEncrypt.TabIndex = 10;
+            this.richTextBoxEncrypt.Text = "";
+            // 
+            // label_name
+            // 
+            this.label_name.AutoSize = true;
+            this.label_name.Location = new System.Drawing.Point(12, 201);
+            this.label_name.Name = "label_name";
+            this.label_name.Size = new System.Drawing.Size(35, 13);
+            this.label_name.TabIndex = 11;
+            this.label_name.Text = "label1";
+            // 
+            // label_variant
+            // 
+            this.label_variant.AutoSize = true;
+            this.label_variant.Location = new System.Drawing.Point(138, 201);
+            this.label_variant.Name = "label_variant";
+            this.label_variant.Size = new System.Drawing.Size(35, 13);
+            this.label_variant.TabIndex = 12;
+            this.label_variant.Text = "label1";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(862, 462);
+            this.Controls.Add(this.label_variant);
+            this.Controls.Add(this.label_name);
+            this.Controls.Add(this.richTextBoxEncrypt);
+            this.Controls.Add(this.richTextBoxCrypt);
+            this.Controls.Add(this.richTextBoxOriginal);
             this.Controls.Add(this.button_password_from_file);
             this.Controls.Add(this.label_password);
             this.Controls.Add(this.textBox_Password);
-            this.Controls.Add(this.label_variant);
-            this.Controls.Add(this.label_name);
             this.Controls.Add(this.button_choose_file);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.Text = "FormMain";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -150,12 +181,15 @@ namespace IB_form
 
         private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.Button button_choose_file;
-        private System.Windows.Forms.Label label_name;
-        private System.Windows.Forms.Label label_variant;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox_Password;
         private System.Windows.Forms.Label label_password;
         private System.Windows.Forms.Button button_password_from_file;
+        private System.Windows.Forms.RichTextBox richTextBoxOriginal;
+        private System.Windows.Forms.RichTextBox richTextBoxCrypt;
+        private System.Windows.Forms.RichTextBox richTextBoxEncrypt;
+        private System.Windows.Forms.Label label_name;
+        private System.Windows.Forms.Label label_variant;
     }
 }
