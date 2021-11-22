@@ -53,42 +53,10 @@ namespace IB_form
             }
         }
 
-        private void button_encrypt_Click(object sender, EventArgs e)
-        {
-            cryptManager =  new CrypterOFB();
-            crypt = cryptManager.Crypt(richTextBoxOriginal.Text, int.Parse(textBox_Password.Text));
-            richTextBoxCrypt.Text = crypt;            
-        }
-
-        private void button_decipher_Click(object sender, EventArgs e)
-        {
-            richTextBoxEncrypt.Text = cryptManager.Encrypt(crypt, int.Parse(textBox_Password.Text));
-        }
-
         private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormInfo example = new FormInfo();
             example.Show();
-        }
-
-        private void button_password_from_file_Click(object sender, EventArgs e)
-        {
-            openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    var sr = new StreamReader(openFileDialog.FileName);
-                    textBox_Password.Text = sr.ReadToEnd();
-                    sr.Close();
-                }
-                catch (SecurityException ex)
-                {
-                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
-                    $"Details:\n\n{ex.StackTrace}");
-                }
-            }
-
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -115,6 +83,18 @@ namespace IB_form
                 File.WriteAllText(openFileDialog.FileName, crypt);
             }
             
+        }
+
+        private void button_encrypt_Click(object sender, EventArgs e)
+        {
+            BusinessLogic.SHA1CryptoServiceProvider a = new BusinessLogic.SHA1CryptoServiceProvider();
+            var hash = a.ComputeHash(Encoding.UTF8.GetBytes(richTextBoxOriginal.Text));
+            var sb = new StringBuilder(hash.Length * 2);
+            foreach (byte b in hash)
+            {
+                sb.Append(b.ToString("x2"));
+            }
+            richTextBoxCrypt.Text = sb.ToString();
         }
     }
 }
