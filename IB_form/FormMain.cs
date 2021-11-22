@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using BusinessLogic;
 using System.IO;
 using System.Security;
+using System.Security.Cryptography;
 
 namespace IB_form
 {
@@ -92,18 +93,28 @@ namespace IB_form
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            //StringBuilder str = new StringBuilder();
-            //for(int i = 0; i < 30; i++)
-            //{
-            //    str.Append("Name");
-            //}
-            //richTextBoxOriginal.Text = str.ToString()  ;
-            //textBox_Password.Text = "123";
-            //Crypter cryptManager = new CrypterOFB();
-            //string crypt = cryptManager.Crypt(richTextBoxOriginal.Text, int.Parse(textBox_Password.Text));
-            //var a = crypt.Length;
-            //richTextBoxCrypt.Text = crypt;
-            //richTextBoxEncrypt.Text = cryptManager.Encrypt(crypt, int.Parse(textBox_Password.Text));
+            BusinessLogic.SHA1CryptoServiceProvider a = new BusinessLogic.SHA1CryptoServiceProvider();
+            var hash = a.ComputeHash(Encoding.UTF8.GetBytes("Help!!!"));
+            var sb = new StringBuilder(hash.Length * 2);
+
+            foreach (byte b in hash)
+            {
+                // can be "x2" if you want lowercase
+                sb.Append(b.ToString("X2"));
+            }
+
+            Console.WriteLine(sb.ToString());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(openFileDialog.FileName, String.Empty);
+                File.WriteAllText(openFileDialog.FileName, crypt);
+            }
+            
         }
     }
 }

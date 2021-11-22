@@ -37,8 +37,10 @@ namespace BusinessLogic
 
         private void CryptIV(byte[] list, int key)
         {
+            
             for (int i = 0; i < list.Count(); i++)
             {
+                list[i] = dvig(list[i],key)
                 list[i] = (byte)(((int)list[i] + key) % 256);
             }
         }
