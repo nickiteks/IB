@@ -40,7 +40,7 @@ namespace BusinessLogic
             
             for (int i = 0; i < list.Count(); i++)
             {
-                list[i] = dvig(list[i],key)
+                //list[i] = dvig(list[i],key)
                 list[i] = (byte)(((int)list[i] + key) % 256);
             }
         }
