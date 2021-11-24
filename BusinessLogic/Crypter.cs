@@ -11,8 +11,8 @@ namespace BusinessLogic
     {
         protected byte[] IV;
         protected int size;
-        public abstract string Crypt(string text, int key);
-        public abstract string Encrypt(string text, int key);
+        public abstract string Crypt(string text, string key);
+        public abstract string Encrypt(string text, string key);
 
         protected void GenerateIV(int size)
         {

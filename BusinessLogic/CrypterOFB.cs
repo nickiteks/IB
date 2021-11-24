@@ -16,9 +16,8 @@ namespace BusinessLogic
             startIV = CloneArray(IV);
 
         }
-        public override string Crypt(string text, int key)
+        public override string Crypt(string text, string key)
         {
-            key %= 256;
             var data = CreateBlocks(text);
             List<List<byte>> cryptData = new List<List<byte>>();
             for(int i = 0; i < data.Count(); i++)
@@ -36,19 +35,15 @@ namespace BusinessLogic
             return str.ToString();
         }
 
-        private void CryptIV(byte[] list,int key)
+        private void CryptIV(byte[] list,string key)
         {
-            Print(IV);
-            for (int i = 0; i < list.Count(); i++)
-            {
-                list[i] =(byte) (((int) list[i] + key)%256);
-            }
+            DES dES = new DES();
+            list = ConvertToByteArray(dES.EncryptDES(ConvertToString(list), key)).ToArray();
         }
 
-        public override string Encrypt(string text, int key)
+        public override string Encrypt(string text, string key)
         {
             IV = CloneArray(startIV);
-            key %= 256;
             var cryptData = CreateBlocks(text);
             List<List<byte>> data = new List<List<byte>>();
             for (int i = 0; i < cryptData.Count(); i++)

@@ -59,7 +59,7 @@
     <Compile Include="CBCmanager.cs" />
     <Compile Include="Crypter.cs" />
     <Compile Include="CrypterOFB.cs" />
-    <Compile Include="CryptManagerCBC.cs" />
+    <Compile Include="DES.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SHA1.cs" />
     <Compile Include="Variant.cs" />

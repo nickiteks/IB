@@ -15,7 +15,7 @@ namespace BusinessLogic
             GenerateIV(16);
             startIV = CloneArray(IV);
         }
-        public override string Crypt(string text, int key)
+        public override string Crypt(string text, string key)
         {
             var data = CreateBlocks(text);
             List<List<byte>> cryptData = new List<List<byte>>();
@@ -35,21 +35,16 @@ namespace BusinessLogic
             return str.ToString();
         }
 
-        private void CryptIV(byte[] list, int key)
+        private void CryptIV(byte[] list, string key)
         {
-            
-            for (int i = 0; i < list.Count(); i++)
-            {
-                //list[i] = dvig(list[i],key)
-                list[i] = (byte)(((int)list[i] + key) % 256);
-            }
+            DES dES = new DES();
+            list = ConvertToByteArray(dES.EncryptDES(ConvertToString(list), key)).ToArray();
         }
 
-        public override string Encrypt(string text, int key)
+        public override string Encrypt(string text, string key)
         {
             IV = CloneArray(startIV);
             var temp = new byte();
-            key %= 256;
             var cryptData = CreateBlocks(text);
             List<List<byte>> data = new List<List<byte>>();
             for (int i = 0; i < cryptData.Count(); i++)
@@ -67,18 +62,10 @@ namespace BusinessLogic
             return str.ToString();
         }
 
-        private byte[] EncryptBlock(byte[] data, int key)
+        private byte[] EncryptBlock(byte[] data, string key)
         {
-            for (int i = 0; i < data.Count(); i++)
-            {
-                int prep = ((int)data[i] - key);
-                if (prep < 0)
-                {
-                    prep += 256;
-                }
-                data[i] =(byte) prep;
-            }
-            return data;
+            DES dES = new DES();
+            return ConvertToByteArray(dES.EncryptDES(ConvertToString(data), key)).ToArray();
         }
     }
 }
