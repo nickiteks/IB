@@ -9,10 +9,10 @@ namespace BusinessLogic
 
 		private const int BLOCK_SIZE_BYTES = 64;
 		private const int HASH_SIZE_BYTES = 20;
-		private uint[] _H;  // these are my chaining variables
+		private uint[] _H;
 		private ulong count;
-		private byte[] _ProcessingBuffer;   // Used to start data when passed less than a block worth.
-		private int _ProcessingBufferCount; // Counts how much data we have stored that still needs processed.
+		private byte[] _ProcessingBuffer;   
+		private int _ProcessingBufferCount; 
 		private uint[] buff;
 
 		public SHA1Internal()
@@ -21,7 +21,7 @@ namespace BusinessLogic
 			_ProcessingBuffer = new byte[BLOCK_SIZE_BYTES];
 			buff = new uint[80];
 
-			Initialize();
+			Initialize(); // Инициализация переменных
 		}
 
 		public void HashCore(byte[] rgb, int ibStart, int cbSize)
@@ -80,7 +80,7 @@ namespace BusinessLogic
 		{
 			count = 0;
 			_ProcessingBufferCount = 0;
-
+			// Инициализация переменных
 			_H[0] = 0x67452301;
 			_H[1] = 0xefcdab89;
 			_H[2] = 0x98badcfe;
@@ -93,23 +93,18 @@ namespace BusinessLogic
 			uint a, b, c, d, e;
 
 			count += BLOCK_SIZE_BYTES;
-
-			// abc removal would not work on the fields
 			uint[] _H = this._H;
 			uint[] buff = this.buff;
 			InitialiseBuff(buff, inputBuffer, inputOffset);
 			FillBuff(buff);
-
+			//Инициализация хеш-значений этой части
 			a = _H[0];
 			b = _H[1];
 			c = _H[2];
 			d = _H[3];
 			e = _H[4];
-
-			// This function was unrolled because it seems to be doubling our performance with current compiler/VM.
-			// Possibly roll up if this changes.
-
-			// ---- Round 1 --------
+			//Основной цикл
+			//1
 			int i = 0;
 			while (i < 20)
 			{
@@ -130,7 +125,7 @@ namespace BusinessLogic
 				i += 5;
 			}
 
-			// ---- Round 2 --------
+			//2
 			while (i < 40)
 			{
 				e += ((a << 5) | (a >> 27)) + (b ^ c ^ d) + 0x6ED9EBA1 + buff[i];
@@ -150,7 +145,7 @@ namespace BusinessLogic
 				i += 5;
 			}
 
-			// ---- Round 3 --------
+			//3
 			while (i < 60)
 			{
 				e += ((a << 5) | (a >> 27)) + ((b & c) | (b & d) | (c & d)) + 0x8F1BBCDC + buff[i];
@@ -170,7 +165,7 @@ namespace BusinessLogic
 				i += 5;
 			}
 
-			// ---- Round 4 --------
+			//4
 			while (i < 80)
 			{
 				e += ((a << 5) | (a >> 27)) + (b ^ c ^ d) + 0xCA62C1D6 + buff[i];
@@ -189,7 +184,7 @@ namespace BusinessLogic
 				c = (c << 30) | (c >> 2);
 				i += 5;
 			}
-
+			//Добавляем хеш-значение к результату
 			_H[0] += a;
 			_H[1] += b;
 			_H[2] += c;
