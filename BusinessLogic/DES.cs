@@ -174,7 +174,6 @@ namespace BusinessLogic
                 key = KeyToNextRound(key);
             }
             key = KeyToPrevRound(key);
-            //textBoxDecodeKeyWord.Text = StringFromBinaryToNormalFormat(key);
             string result = "";
             for (int i = 0; i < Blocks.Length; i++)
                 result += Blocks[i];
@@ -193,7 +192,6 @@ namespace BusinessLogic
                 key = KeyToPrevRound(key);
             }
             key = KeyToNextRound(key);
-            //textBoxEncodeKeyWord.Text = StringFromBinaryToNormalFormat(key);
             string result = "";
 
             for (int i = 0; i < Blocks.Length; i++)

@@ -56,13 +56,13 @@ namespace IB_form
         private void button_encrypt_Click(object sender, EventArgs e)
         {
             cryptManager =  new CrypterOFB();
-            crypt = cryptManager.Crypt(richTextBoxOriginal.Text, int.Parse(textBox_Password.Text));
+            crypt = cryptManager.Crypt(richTextBoxOriginal.Text, textBox_Password.Text);
             richTextBoxCrypt.Text = crypt;            
         }
 
         private void button_decipher_Click(object sender, EventArgs e)
         {
-            richTextBoxEncrypt.Text = cryptManager.Encrypt(crypt, int.Parse(textBox_Password.Text));
+            richTextBoxEncrypt.Text = cryptManager.Encrypt(crypt, textBox_Password.Text);
         }
 
         private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
