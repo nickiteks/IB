@@ -55,7 +55,7 @@ namespace IB_form
 
         private void button_encrypt_Click(object sender, EventArgs e)
         {
-            cryptManager =  new CrypterOFB();
+            cryptManager =  new OFB();
             crypt = cryptManager.Crypt(richTextBoxOriginal.Text, textBox_Password.Text);
             richTextBoxCrypt.Text = crypt;            
         }
@@ -93,17 +93,10 @@ namespace IB_form
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            BusinessLogic.SHA1CryptoServiceProvider a = new BusinessLogic.SHA1CryptoServiceProvider();
-            var hash = a.ComputeHash(Encoding.UTF8.GetBytes("Help!!!"));
-            var sb = new StringBuilder(hash.Length * 2);
-
-            foreach (byte b in hash)
-            {
-                // can be "x2" if you want lowercase
-                sb.Append(b.ToString("X2"));
-            }
-
-            Console.WriteLine(sb.ToString());
+            String text = "123456ABCD132536";
+            String key = "AABB09182736CCDD";
+            textBox_Password.Text = key;
+            richTextBoxOriginal.Text = text;
         }
 
         private void button1_Click(object sender, EventArgs e)
