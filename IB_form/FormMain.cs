@@ -55,7 +55,7 @@ namespace IB_form
 
         private void button_encrypt_Click(object sender, EventArgs e)
         {
-            cryptManager =  new OFB();
+            cryptManager =  new CBC();
             crypt = cryptManager.Crypt(richTextBoxOriginal.Text, textBox_Password.Text);
             richTextBoxCrypt.Text = crypt;            
         }

@@ -97,6 +97,7 @@ namespace BusinessLogic
         int[] shiftBits = { 1, 1, 2, 2, 2, 2, 2, 2,
                             1, 2, 2, 2, 2, 2, 2, 1 };
 
+        //Метод их 10 системы в 16 ричную
         public string DecimalToHexadecimal(int dec)
         {
             if (dec < 1) return "0";
@@ -117,12 +118,12 @@ namespace BusinessLogic
             }
             return hexStr;
         }
-
+        //Метод удаления пробелов
         public string RemoveWhitespace(string str)
         {
             return string.Join("", str.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries));
         }
-
+        //Метод перестановки
         public String permutation(int[] sequence, String input)
         {
             String output = "";
@@ -132,7 +133,7 @@ namespace BusinessLogic
             output = binToHex(output);
             return output;
         }
-
+        // Двоичное число в 10 
         public static string binToHex(string bin)
         {
 
@@ -143,6 +144,7 @@ namespace BusinessLogic
             }
             return output;
         }
+        // 16 ричное число в двоичное
         private string hextoBin(string input)
         {
             int n = input.Length * 4;
@@ -154,7 +156,7 @@ namespace BusinessLogic
                 binarystring = "0" + binarystring;
             return binarystring;
         }
-
+        //xor
         public string xor(string aInput, string bInput)
         {
             long t_a = Convert.ToInt64(aInput, 16);
@@ -165,7 +167,7 @@ namespace BusinessLogic
                 aInput = "0" + aInput;
             return aInput;
         }
-
+        //считаем сдвиг
         public String leftCircularShift(String input, int numBits)
         {
             int n = input.Length * 4;
@@ -177,7 +179,7 @@ namespace BusinessLogic
                 input = permutation(perm, input);
             return input;
         }
-
+        // получаем ключи для всех раундов
         public String[] getKeys(String key)
         {
             String[] keys = new String[16];
@@ -193,7 +195,7 @@ namespace BusinessLogic
             }
             return keys;
         }
-
+        //Применяем sBox к данным
         public String sBox(String input)
         {
             String output = "";
@@ -210,7 +212,7 @@ namespace BusinessLogic
             }
             return output;
         }
-
+        //Считаем 1 раунд
         public String round(String input, String key, int num)
         {
             String left = input.Substring(0, 8);
@@ -223,7 +225,7 @@ namespace BusinessLogic
             left = xor(left, temp);
             return right + left;
         }
-
+        //шифруем
         public String encrypt(String plainText, String key)
         {
             int i;
@@ -238,7 +240,7 @@ namespace BusinessLogic
             plainText = permutation(IP1, plainText);
             return plainText;
         }
-
+        //Расшифровываем
         public String decrypt(String plainText, String key)
         {
             int i;
